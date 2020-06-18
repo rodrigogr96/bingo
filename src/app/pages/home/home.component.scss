@@ -1,0 +1,116 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
+    background-color:  white;
+    overflow-y: scroll;
+}
+
+.con-right{
+    width: 100%;
+    height: 450px;
+    padding: 16px 8px;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+
+    span{
+        color: black;
+        font-size: 16px;
+        font-weight: bold;
+    }
+}
+
+.contain{
+    height: 100%;
+    width: 100%;
+}
+
+.numberBingo{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color:#b0bec5;
+    cursor: pointer;
+    .numberBingoColor{
+        align-self: center;
+        display: flex;
+        justify-content: center;
+        
+        span{
+            align-self: center;
+            color: black;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    }
+}
+
+.mat-grid-list{
+    height: 100% !important;
+    box-sizing: border-box;
+    
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.container-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 32px;
+}
+
+.save{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 32px;
+    
+}
+.example-flex-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 60%;
+    align-self: center;
+}
+
+@media only screen and (max-width: 780px) {
+    .numberBingoColor{
+        span{
+            font-size: 16px !important;
+        }
+    }
+}
+
+.fvspan{
+    font-size: 14px !important;
+    color: white !important;
+}
+
+.circle{
+    margin-top: 8px;
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.width{
+    width: 70%;
+}
+
+.container-button{
+    button{
+        margin-right: 16px;
+        margin-top: 16px;
+    }
+}

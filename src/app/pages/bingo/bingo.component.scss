@@ -1,0 +1,252 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
+    background-color:  white;
+    overflow-y: scroll;
+}
+
+.players{
+    width: 100%;
+    padding: 16px 8px;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    margin-bottom: 64px;
+}
+.row-show{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    height: 40px;
+    align-items: center;
+    margin-bottom: 16px;
+    span{
+        margin: 0px;
+        color: black;
+
+    }
+}
+
+.con-right{
+    width: 100%;
+    height: 350px;
+    padding: 16px 8px;
+    padding-top: 0px;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+
+    span{
+        color: black;
+        font-size: 16px;
+        font-weight: bold;
+    }
+}
+
+.contain{
+    height: 100%;
+    width: 100%;
+    margin-top: 110px;
+}
+
+.numberBingo{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color:#b0bec5;
+    cursor: pointer;
+    .numberBingoColor{
+        align-self: center;
+        display: flex;
+        justify-content: center;
+        
+        span{
+            align-self: center;
+            color: black;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    }
+}
+
+.mat-grid-list{
+    height: 100% !important;
+    box-sizing: border-box;
+    
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.container-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 32px;
+}
+
+.save{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 32px;
+    
+}
+.example-flex-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 60%;
+    align-self: center;
+}
+
+@media only screen and (max-width: 780px) {
+    .numberBingoColor{
+        span{
+            font-size: 12px !important;
+        }
+    }
+}
+
+.fvspan{
+    font-size: 14px !important;
+    color: white !important;
+}
+.circle{
+    margin-top: 8px;
+    width: 40px !important;
+    height: 40px !important;
+}
+.width{
+    width: 70%;
+}
+
+.showNumber{
+    height: 80px;
+    width: 96%;
+    margin-bottom: 16px;
+    display: flex;
+    padding-top: 8px;
+    padding-bottom: 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    position: fixed;
+    z-index: 99;
+    background-color: white;
+}
+.firstNumber{
+    width: 80px;
+    background-color: #b0bec5;
+    height: 100%;
+    margin-right: 32px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    span{
+        font-size: 12px;
+        font-weight: lighter;
+        margin: 0px;
+    }
+    .white{
+        width: 100%;
+        height: 55px;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        span{
+            font-size: 40px;
+            font-weight: bold;
+        }
+    }
+}
+.lastNumber{
+    width: 100%;
+    background-color: #b0bec5;
+    padding: 4px 8px;
+    border-radius: 8px;
+    height: 100%;
+    span{
+        font-size: 12px;
+        font-weight: lighter;
+        margin: 0px;
+    }
+    .white2{
+        width: 100%;
+        height: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 8px;
+        flex-direction: row;
+    }
+    .bgwhite{
+        width: 55px;
+        height: 100%;
+        border-radius: 50%;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span{
+            font-size: 40px;
+            font-weight: bold;
+        }
+    }
+}
+
+.profile-card{
+    margin-bottom: 16px;
+    padding: 8px !important;
+    background-color: #b0bec5;
+}
+.profile-detail{
+    display: flex;
+    flex-direction: row;
+    .material-icons {
+        font-size: 40px !important;
+    }
+
+    .detail{
+        p{
+            margin: 4px;
+            font-size: 12px;
+        }
+    }
+}
+.contain2{
+    width: 100%;
+    height: 30px;
+    .numberBingo{
+        background-color: white;
+        border-radius: 16px;
+    }
+}
+
+.active-profile{
+    background-color: #ffd740;
+}
+
+.disabled-profile{
+    display: none;
+}
+.active-profile2{
+    display: none !important;
+}
+
+.play{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 16px;
+    z-index: 99;
+}

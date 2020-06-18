@@ -1,0 +1,111 @@
+<div class="container">
+
+  <div class="play" *ngIf="myInfo.master" (click)="girar()">
+    <div class="example-button-container" >
+      <button mat-fab color="accent" >
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="con-right">
+    <div class="showNumber">
+      <div class="firstNumber">
+        <span>Numero</span>
+        <div class="white">
+          <span>{{numberBingo}}</span>
+        </div>
+      </div>
+      <div class="lastNumber"> 
+        <span>Los ultimos 3 numeros</span>
+        <div class="white2">
+          <div class="bgwhite">
+            <span>{{numberBingo3}}</span>
+          </div>
+          <div class="bgwhite">
+            <span>{{numberBingo2}}</span>
+          </div>
+          <div class="bgwhite">
+            <span>{{numberBingo1}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contain">
+      <mat-grid-list cols="{{rowBingo}}" rowHeight="fit" >
+        <mat-grid-tile *ngFor="let element of objectBingo; let i = index">
+          <div class="numberBingo" [ngStyle]="changeBG(element)" >
+            <div class="numberBingoColor">
+              <span [ngStyle]="changeBGspan(element)">{{element}}</span>
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+  <div class="players">
+    <div class="row-show">
+      <span class="material-icons">
+        supervised_user_circle
+      </span>
+      <span>Jugadores - {{countPlayer}}</span>
+    </div>
+    <mat-card *ngFor="let element of infoRoom; let i = index" class="profile-card" 
+      [ngClass]="{
+        'active-profile':   element.phone == myInfo.phone ,
+        'disabled-profile': element.phone != myInfo.phone 
+      }"
+     >
+        <div *ngIf="element.phone == myInfo.phone">
+        <div class="profile-detail" >
+          <span class="material-icons">
+            account_circle
+          </span>
+          <div class="detail">
+            <p>{{element.phone == myInfo.phone ? 'Yo' : element.user}}</p>
+            <p>{{element.phone}}</p>
+          </div>
+        </div>
+        <div class="contain2">
+          <mat-grid-list cols="5" rowHeight="fit" >
+            <mat-grid-tile *ngFor="let row of element.bingo; let iChild = index">
+              <div class="numberBingo"  [ngStyle]="changeBG(row)">
+                <div class="numberBingoColor" >
+                  <span [ngStyle]="changeBGspan(row)">{{row}}</span>
+                </div>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+        </div>
+      </mat-card>
+      <mat-card *ngFor="let element of infoRoom; let i = index" class="profile-card" 
+      [ngClass]="{
+        'active-profile2':   element.phone == myInfo.phone 
+      }"
+     >
+        <div *ngIf="element.phone != myInfo.phone">
+        <div class="profile-detail" >
+          <span class="material-icons">
+            account_circle
+          </span>
+          <div class="detail">
+            <p>{{element.phone == myInfo.phone ? 'Yo' : element.user}}</p>
+            <p>{{element.phone}}</p>
+          </div>
+        </div>
+        <div class="contain2">
+          <mat-grid-list cols="5" rowHeight="fit" >
+            <mat-grid-tile *ngFor="let row of element.bingo; let iChild = index">
+              <div class="numberBingo"  [ngStyle]="changeBG(row)">
+                <div class="numberBingoColor">
+                  <span [ngStyle]="changeBGspan(row)">{{row}}</span>
+                </div>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+        </div>
+      </mat-card>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$ng-template-primary: mat-palette($mat-pink);
+$ng-template-accent: mat-palette($mat-blue-grey, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$ng-template-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$ng-template-theme: mat-light-theme($ng-template-primary, $ng-template-accent, $ng-template-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($ng-template-theme);
+
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+
+*{
+  transition: .3s ease !important;
+}
+
+html, body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+.mat-dialog-container {
+  background-color: #424242 !important
+}
+
+.mat-bottom-sheet-container {
+  padding: 0px !important;
+  height: 200px !important;
+  overflow-y: scroll;
+}
+
+.mat-list-base {
+  padding: 0px !important;
+}
+.mat-list-base .mat-list-item .mat-list-text, .mat-list-base .mat-list-option .mat-list-text {
+  overflow: scroll !important
+}
+.mat-list-base .mat-list-item, .mat-list-base .mat-list-option {
+  height: 80px !important;
+}
+
+.mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-content {
+  flex-direction: column !important;
+  padding: 8px 8px !important;
+}
+
+.mat-grid-list{
+  width: 100%;
+}
+
+.mat-bottom-sheet-container {
+  box-shadow: 0 8px 10px -5px rgba(0,0,0,.2), 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12) !important;
+  background: #424242 !important;
+  color: #fff !important;
+}
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+

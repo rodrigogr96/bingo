@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="con-right">
+    <div class="save">
+      <div class="example-flex-container">
+        <div class="example-button-container">
+          <button mat-fab color="accent" (click)="functionGlobal('save')">
+            <mat-icon>save</mat-icon>
+          </button>
+        </div>
+        
+        <div class="example-button-container">
+          <button mat-fab color="accent" (click)="functionGlobal('clear')">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <div class="example-button-container">
+          <button mat-fab color="primary" (click)="functionGlobal('favorite')">
+            <mat-icon>favorite</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="contain">
+      <mat-grid-list cols="{{rowBingo}}" rowHeight="fit" >
+        <mat-grid-tile *ngFor="let element of objectBingo; let i = index">
+          <div class="numberBingo" [ngStyle]="changeBG(element)" (click)="selectNumber(i)">
+            <div class="numberBingoColor">
+              <span [ngStyle]="changeBGspan(element)">{{element.number}}</span>
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    
+  </div>
+  <form [formGroup]="formGroup">
+
+    <mat-form-field class="form-element" appearance="outline">
+
+      <mat-label>Número de celular</mat-label>
+      <input matInput  formControlName="phone" type="text" mask="000 000 000" maxlength="11">
+      <button mat-icon-button matSuffix (click)="savePhone = !savePhone"  >
+        <mat-icon>{{savePhone ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
+      </button>
+      <mat-error *ngIf="errorPhone()">
+        {{ phoneError }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-element" appearance="outline">
+      <mat-label>Usuario</mat-label>
+      <input matInput  formControlName="user" type="text" maxlength="20" numberStringOnly>
+      <button mat-icon-button matSuffix (click)="saveUser = !saveUser">
+        <mat-icon>{{saveUser ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
+      </button>
+      <mat-error *ngIf="errorUser()">
+        {{ userError }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-element" appearance="outline">
+      <mat-label>Sala</mat-label>
+      <input matInput  formControlName="room" type="text" maxlength="20" numberStringOnly autocomplete="off">
+      <mat-error *ngIf="errorPassword()">
+        {{ roomError }}
+      </mat-error>
+    </mat-form-field>
+
+    <div class="container-button">
+
+      <button mat-raised-button color="primary" type="submit" class="button" (click)="validate(formGroup.value,0)" >Crear sala</button>
+      <button mat-raised-button color="accent" type="submit" class="button" (click)="validate(formGroup.value,1)" >Buscar sala</button>
+    </div>
+
+  </form> 
+</div>
