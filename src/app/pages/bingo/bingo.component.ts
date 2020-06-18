@@ -29,7 +29,7 @@ export class BingoComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router:Router,private _snackBar: MatSnackBar) { 
     this.objBingo()
-    this.socket = io("https://bingorgr.herokuapp.com/")
+    this.socket = io("https://cors-anywhere.herokuapp.com/https://bingorgr.herokuapp.com/")
   }
 
   ngOnInit() {
