@@ -44,7 +44,7 @@ app.all('*', function(req, res, next) {
   next();
 });
 
-app.use('/bingo',cors(corsOptions), indexRouter)
+
 
 // Set static folder
 app.use(express.static(path.join(__dirname, '/dist')));
@@ -54,6 +54,7 @@ app.get('*', (req,res) =>{
   res.sendFile(path.join(__dirname+'/dist/index.html'));
 });
 
+app.use('/bingo',cors(corsOptions), indexRouter)
 // Run when client connects
 io.on('connection', socket => {
 
