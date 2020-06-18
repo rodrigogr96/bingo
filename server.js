@@ -19,7 +19,7 @@ var cookieParser = require('cookie-parser')
 var cors = require('cors')
 var corsOptions = {
   origin: '*',
-  methods: "POST",
+  methods: "POST,GET",
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 var bodyParser = require('body-parser')
@@ -36,6 +36,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(cookieParser())
 
+app.use('/bingo',cors(corsOptions), indexRouter)
+
 // Set static folder
 app.use(express.static(path.join(__dirname, '/dist')));
 
@@ -44,7 +46,6 @@ app.get('*', (req,res) =>{
   res.sendFile(path.join(__dirname+'/dist/index.html'));
 });
 
-app.use('/bingo',cors(corsOptions), indexRouter)
 // Run when client connects
 io.on('connection', socket => {
 

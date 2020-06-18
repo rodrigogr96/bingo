@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
   }
 
   async postCreateSala(obj,type){
-    this.global.globalPost('POST','https://bingorgr.herokuapp.com/bingo/createSala',{room:obj.room},'response').subscribe(
+    this.global.globalPost('GET',`https://bingorgr.herokuapp.com/bingo/${obj.room}`,null,'response').subscribe(
       res=>{
         if(!res.body.room){
           if(this.savePhone){

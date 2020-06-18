@@ -8,8 +8,9 @@ const {
 } = require('../utils/users');
 
 /* GET home page. */
-router.post('/createSala', async(req, res, next)=> {
-  const validate = getCurrentRoomName(req.body.room)
+router.use('/createSala/:id', async(req, res, next)=> {
+  console.log(req.params)
+  const validate = getCurrentRoomName(req.params.id)
   console.log(validate)
   if(validate==-1){
     res.status(200).send({room:false})
