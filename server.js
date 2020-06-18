@@ -41,7 +41,9 @@ app.use('/bingo',cors(corsOptions), indexRouter)
 app.use(express.static(path.join(__dirname, './dist/bingo')));
 
 
-
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname+'./dist/bingo/index.html'));
+});
 
 // Run when client connects
 io.on('connection', socket => {
