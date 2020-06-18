@@ -36,6 +36,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(cookieParser())
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 app.use('/bingo',cors(corsOptions), indexRouter)
 
 // Set static folder
