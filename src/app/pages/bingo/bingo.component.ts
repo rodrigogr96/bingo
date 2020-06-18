@@ -23,6 +23,7 @@ export class BingoComponent implements OnInit {
   objectBingo = []
   arrayBingo=[]
   numberSeleted=[]
+  marter = false
 
   private socket: any;
 
@@ -40,7 +41,7 @@ export class BingoComponent implements OnInit {
         const room = JSON.parse(sessionStorage.getItem("sessionRoom")).room
         const user = JSON.parse(sessionStorage.getItem("sessionRoom")).user
         const master = JSON.parse(sessionStorage.getItem("sessionRoom")).master
-
+        this.marter=master
         this.myInfo = JSON.parse(sessionStorage.getItem("sessionRoom"))
 
         
