@@ -19,7 +19,7 @@ var cookieParser = require('cookie-parser')
 var cors = require('cors')
 var corsOptions = {
   origin: '*',
-  methods: "POST,GET",
+  methods: ['POST','GET'],
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 var bodyParser = require('body-parser')
@@ -35,6 +35,12 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(cookieParser())
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.use('/bingo',cors(corsOptions), indexRouter)
 
