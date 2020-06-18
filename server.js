@@ -19,6 +19,7 @@ var cookieParser = require('cookie-parser')
 var cors = require('cors')
 var corsOptions = {
   origin: '*',
+  methods: "POST",
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 var bodyParser = require('body-parser')
