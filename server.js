@@ -38,7 +38,7 @@ app.use(cookieParser())
 app.use('/bingo',cors(corsOptions), indexRouter)
 
 // Set static folder
-app.use(path.join(__dirname, '/dist'));
+app.use(express.static(path.join(__dirname, '/dist')));
 
 
 app.get('*', (req,res) =>{
