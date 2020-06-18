@@ -44,8 +44,6 @@ app.all('*', function(req, res, next) {
   next();
 });
 
-
-
 // Set static folder
 app.use(express.static(path.join(__dirname, '/dist')));
 
