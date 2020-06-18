@@ -123,6 +123,4 @@ io.on('connection', socket => {
     });
 });
 
-const port = process.env.PORT ;
-
-server.listen(port, () => console.log(`Server running on port ${port}`));
+server.listen(process.env.PORT , () => console.log(`Server running on port ${process.env.PORT}`));
