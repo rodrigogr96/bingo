@@ -117,8 +117,8 @@ export class HomeComponent implements OnInit {
     console.log(type)
     if(this.formGroup.status == "VALID"){
 
-        if(this.arrayBingo.length!=5){
-          this._snackBar.open('Debe seleccionar 5 números',null,{duration:2500});
+        if(this.arrayBingo.length!=8){
+          this._snackBar.open('Debe seleccionar 8 números',null,{duration:2500});
           return false
         }
         
@@ -216,7 +216,7 @@ export class HomeComponent implements OnInit {
       return false
     }
 
-    if(this.arrayBingo.length>4){
+    if(this.arrayBingo.length>8){
       return false
     }
 
