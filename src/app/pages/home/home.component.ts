@@ -216,7 +216,7 @@ export class HomeComponent implements OnInit {
       return false
     }
 
-    if(this.arrayBingo.length>8){
+    if(this.arrayBingo.length>7){
       return false
     }
 
