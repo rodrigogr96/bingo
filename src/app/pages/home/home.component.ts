@@ -66,51 +66,51 @@ export class HomeComponent implements OnInit {
     this.createForm()
   }
 
-  async postCreateSala(obj,type){
-    this.global.globalPost('GET',`https://bingorgr.herokuapp.com/bingo/createSala/${obj.room}`,null,'response').subscribe(
-      res=>{
-        if(!res.body.room){
-          if(this.savePhone){
-            localStorage.setItem('phone',obj.phone)
-          }else{
-              localStorage.removeItem('phone')
-          }
-          if(this.saveUser){
-            localStorage.setItem('user',obj.user)
-          }else{
-            localStorage.removeItem('user')
-          }
+  // async postCreateSala(obj,type){
+  //   this.global.globalPost('GET',`https://bingorgr.herokuapp.com/bingo/createSala/${obj.room}`,null,'response').subscribe(
+  //     res=>{
+  //       if(!res.body.room){
+  //         if(this.savePhone){
+  //           localStorage.setItem('phone',obj.phone)
+  //         }else{
+  //             localStorage.removeItem('phone')
+  //         }
+  //         if(this.saveUser){
+  //           localStorage.setItem('user',obj.user)
+  //         }else{
+  //           localStorage.removeItem('user')
+  //         }
 
-          sessionStorage.setItem("sessionRoom",JSON.stringify(obj))
+  //         sessionStorage.setItem("sessionRoom",JSON.stringify(obj))
 
-          this.router.navigate([`/bingo/${obj.room}`])
-        }else{
-          if(type==1){
-            if(this.savePhone){
-              localStorage.setItem('phone',obj.phone)
-            }else{
-                localStorage.removeItem('phone')
-            }
-            if(this.saveUser){
-              localStorage.setItem('user',obj.user)
-            }else{
-              localStorage.removeItem('user')
-            }
+  //         this.router.navigate([`/bingo/${obj.room}`])
+  //       }else{
+  //         if(type==1){
+  //           if(this.savePhone){
+  //             localStorage.setItem('phone',obj.phone)
+  //           }else{
+  //               localStorage.removeItem('phone')
+  //           }
+  //           if(this.saveUser){
+  //             localStorage.setItem('user',obj.user)
+  //           }else{
+  //             localStorage.removeItem('user')
+  //           }
   
-            sessionStorage.setItem("sessionRoom",JSON.stringify(obj))
+  //           sessionStorage.setItem("sessionRoom",JSON.stringify(obj))
   
-            this.router.navigate([`/bingo/${obj.room}`])
-          }else{
-            this._snackBar.open('La sala ya existe.',null,{duration:2500});
-          }
-        }
+  //           this.router.navigate([`/bingo/${obj.room}`])
+  //         }else{
+  //           this._snackBar.open('La sala ya existe.',null,{duration:2500});
+  //         }
+  //       }
         
-      },
-      error=>{
-        this._snackBar.open('Lo sentimos intentalo de nuevo.',null,{duration:2500});
-      }
-    )
-  }
+  //     },
+  //     error=>{
+  //       this._snackBar.open('Lo sentimos intentalo de nuevo.',null,{duration:2500});
+  //     }
+  //   )
+  // }
 
   async validate(response,type){
     console.log(response)
@@ -126,7 +126,20 @@ export class HomeComponent implements OnInit {
         objectData.bingo = this.arrayBingo
         objectData.master = type == 0 ? true:false
 
-        await this.postCreateSala(objectData,type)
+        if(this.savePhone){
+          localStorage.setItem('phone',objectData.phone)
+        }else{
+            localStorage.removeItem('phone')
+        }
+        if(this.saveUser){
+          localStorage.setItem('user',objectData.user)
+        }else{
+          localStorage.removeItem('user')
+        }
+
+        sessionStorage.setItem("sessionRoom",JSON.stringify(objectData))
+
+        this.router.navigate([`/bingo/${objectData.room}`])
 
     }else{
       this._snackBar.open('Debe seleccionar 5 números',null,{duration:2500});

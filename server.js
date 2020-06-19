@@ -15,33 +15,33 @@ const {
     chocolatear
   } = require('./utils/users');
 
-var cookieParser = require('cookie-parser')
-var cors = require('cors')
-const corsOpt = {
-  origin: '*', // this work well to configure origin url in the server
-  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'], // to works well with web app, OPTIONS is required
-  allowedHeaders: '*' // allow json and token in the headers
-};
-var bodyParser = require('body-parser')
+// var cookieParser = require('cookie-parser')
+// var cors = require('cors')
+// const corsOpt = {
+//   origin: '*', // this work well to configure origin url in the server
+//   methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'], // to works well with web app, OPTIONS is required
+//   allowedHeaders: '*' // allow json and token in the headers
+// };
+// var bodyParser = require('body-parser')
 
-var indexRouter = require('./routes/index')
+// var indexRouter = require('./routes/index')
 
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
 
-app.use(express.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(express.json())
+// app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(cookieParser())
+// app.use(cookieParser())
 
 
 
-app.use(cors(corsOpt));
-app.options('*', cors(corsOpt));
+// app.use(cors(corsOpt));
+// app.options('*', cors(corsOpt));
 
-app.use('/bingo', indexRouter)
+// app.use('/bingo', indexRouter)
 
 // Set static folder
 app.use(express.static(path.join(__dirname, '/dist')));
