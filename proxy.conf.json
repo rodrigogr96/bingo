@@ -1,0 +1,7 @@
+{
+    "/api/": {
+        "target": "http://aks-mimovistar-ingress-dev.eastus2.cloudapp.azure.com",
+        "secure": false,
+        "changeOrigin": true
+    }
+}

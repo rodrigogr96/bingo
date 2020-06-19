@@ -42,7 +42,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/bingo',cors(corsOptions), indexRouter)
+app.use('/bingo', indexRouter)
 
 // Set static folder
 app.use(express.static(path.join(__dirname, '/dist')));
