@@ -17,11 +17,11 @@ const {
 
 var cookieParser = require('cookie-parser')
 var cors = require('cors')
-var corsOptions = {
-  origin: '*',
-  methods: ['POST','GET'],
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+const corsOpt = {
+  origin: '*', // this work well to configure origin url in the server
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'], // to works well with web app, OPTIONS is required
+  allowedHeaders: '*' // allow json and token in the headers
+};
 var bodyParser = require('body-parser')
 
 var indexRouter = require('./routes/index')
@@ -36,11 +36,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(cookieParser())
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+
+
+app.use(cors(corsOpt));
+app.options('*', cors(corsOpt));
 
 app.use('/bingo', indexRouter)
 
