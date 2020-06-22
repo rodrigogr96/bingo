@@ -44,11 +44,21 @@ export class BottomSheetOverviewExampleSheet {
 })
 export class HomeComponent implements OnInit {
 
-  rowBingo = 10
+  rowBingo = 5
   countBingo = 75
   objectBingo = []
   arrayBingo=[]
   saveObjectBingo=[]
+
+  arrayString = ['b','i','n','g','o']
+  numbersBingo = {
+    b: [],
+    i: [],
+    n: [],
+    g: [],
+    o: []
+  }
+  class = ['flip']
 
 
   formGroup: FormGroup
@@ -62,8 +72,88 @@ export class HomeComponent implements OnInit {
   constructor(private formBuilder : FormBuilder,private _snackBar: MatSnackBar,private _bottomSheet: MatBottomSheet, private router:Router,private global : GlobalServiceService) { }
 
   ngOnInit() {
-    this.objBingo()
+    // this.objBingo()
     this.createForm()
+    this.completeNumbers()
+  }
+
+  clear(){
+    this.numbersBingo.b=[]
+    this.numbersBingo.i=[]
+    this.numbersBingo.n=[]
+    this.numbersBingo.g=[]
+    this.numbersBingo.o=[]
+  }
+
+  completeNumbers(){
+
+    this.clear()
+
+    for (var i = 1; i < 16; i++) {
+      this.numbersBingo.b.push(i);
+      this.numbersBingo.i.push(15 + i);
+      this.numbersBingo.n.push(30 + i);
+      this.numbersBingo.g.push(45 + i);
+      this.numbersBingo.o.push(60 + i);
+    }
+
+    this.randomNumbers(this.numbersBingo)
+  }
+
+  randomNumbers(array){
+    var ctr = 15, tempb,tempi,tempn,tempg,tempo,indexb,indexi,indexn,indexg,indexo;
+
+    while (ctr > 0) {
+
+        indexb = Math.floor(Math.random() * ctr);
+        indexi = Math.floor(Math.random() * ctr);
+        indexn = Math.floor(Math.random() * ctr);
+        indexg = Math.floor(Math.random() * ctr);
+        indexo = Math.floor(Math.random() * ctr);
+
+        ctr--;
+
+        tempb = array.b[ctr];
+        tempi = array.i[ctr];
+        tempn = array.n[ctr];
+        tempg = array.g[ctr];
+        tempo = array.o[ctr];
+
+        array.b[ctr] = array.b[indexb];
+        array.i[ctr] = array.i[indexi];
+        array.n[ctr] = array.n[indexn];
+        array.g[ctr] = array.g[indexg];
+        array.o[ctr] = array.o[indexo];
+
+        array.b[indexb] = tempb;
+        array.i[indexi] = tempi;
+        array.n[indexn] = tempn;
+        array.g[indexg] = tempg;
+        array.o[indexo] = tempo;
+    }
+
+    this.numbersBingo.b = array.b.slice(0, 5)
+    this.numbersBingo.i = array.i.slice(0, 5)
+    this.numbersBingo.n = array.n.slice(0, 5)
+    this.numbersBingo.n[2]='FREE'
+    this.numbersBingo.g = array.g.slice(0, 5)
+    this.numbersBingo.o = array.o.slice(0, 5)
+  }
+
+  flip(){
+    return this.class
+  }
+
+  swiperight(e){
+    console.log(e)
+    this.class=[]
+    setTimeout(() => {
+      this.class=['flip2']
+    }, 100);
+    setTimeout(() => {
+      this.completeNumbers()
+      this.class=['flip']
+    }, 400);
   }
 
   // async postCreateSala(obj,type){
@@ -255,6 +345,8 @@ export class HomeComponent implements OnInit {
       for (let index = 1; index <= this.countBingo; index++) {
         this.objectBingo.push({id:`numero${index}`,number:index ,selected:false})
       }
+    }else if('change'){
+      
     }else{
 
       const dialogRef = this._bottomSheet.open(

@@ -1,35 +1,38 @@
 <div class="container">
   <div class="con-right">
-    <div class="save">
-      <div class="example-flex-container">
-        <div class="example-button-container">
-          <button mat-fab color="accent" (click)="functionGlobal('save')">
-            <mat-icon>save</mat-icon>
-          </button>
-        </div>
-        
-        <div class="example-button-container">
-          <button mat-fab color="accent" (click)="functionGlobal('clear')">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-        <div class="example-button-container">
-          <button mat-fab color="primary" (click)="functionGlobal('favorite')">
-            <mat-icon>favorite</mat-icon>
-          </button>
+    <div class="contain" [ngClass]="flip()" (swiperight)="swiperight($event)">
+      <div class="head-bingo">
+        <div class="{{element}}" *ngFor="let element of arrayString; let i = index">
+          <p >{{element}}</p>
         </div>
       </div>
-    </div>
-    <div class="contain">
-      <mat-grid-list cols="{{rowBingo}}" rowHeight="fit" >
-        <mat-grid-tile *ngFor="let element of objectBingo; let i = index">
-          <div class="numberBingo" [ngStyle]="changeBG(element)" (click)="selectNumber(i)">
-            <div class="numberBingoColor">
-              <span [ngStyle]="changeBGspan(element)">{{element.number}}</span>
-            </div>
+      <div class="body-bingo">
+        <div class="column1 column" >
+          <div *ngFor="let element of numbersBingo.b; let i = index">
+            <p>{{element}}</p>
           </div>
-        </mat-grid-tile>
-      </mat-grid-list>
+        </div>
+        <div class="column2 column" >
+          <div *ngFor="let element of numbersBingo.i; let i = index">
+            <p>{{element}}</p>
+          </div>
+        </div>
+        <div class="column3 column">
+          <div *ngFor="let element of numbersBingo.n; let i = index" class="{{element}}">
+            <p >{{element}}</p>
+          </div>
+        </div>
+        <div class="column4 column">
+          <div *ngFor="let element of numbersBingo.g; let i = index">
+            <p>{{element}}</p>
+          </div>
+        </div>
+        <div class="column5 column" >
+          <div *ngFor="let element of numbersBingo.o; let i = index">
+            <p>{{element}}</p>
+          </div>
+        </div>
+      </div>
     </div>
     
   </div>
