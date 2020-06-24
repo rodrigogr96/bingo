@@ -10,7 +10,7 @@ const {
     getRoom,
     createRoomNew,
     existMaster,
-    pushBingo
+    pushBingo,
   } = require('./utils/users');
 
 
