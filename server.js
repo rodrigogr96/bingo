@@ -12,38 +12,19 @@ const {
     chocolatearArray,
     createRoom,
     getCurrentRoomName,
-    chocolatear
+    chocolatear,
+    getRoomBingo,
+    getRoom,
+    createRoomNew,
+    existMaster,
+    pushBingo
   } = require('./utils/users');
 
-// var cookieParser = require('cookie-parser')
-// var cors = require('cors')
-// const corsOpt = {
-//   origin: '*', // this work well to configure origin url in the server
-//   methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'], // to works well with web app, OPTIONS is required
-//   allowedHeaders: '*' // allow json and token in the headers
-// };
-// var bodyParser = require('body-parser')
-
-// var indexRouter = require('./routes/index')
 
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-
-// app.use(express.json())
-// app.use(bodyParser.urlencoded({ extended: true }))
-
-// app.use(cookieParser())
-
-
-
-// app.use(cors(corsOpt));
-// app.options('*', cors(corsOpt));
-
-// app.use('/bingo', indexRouter)
-
-// Set static folder
 app.use(express.static(path.join(__dirname, '/dist')));
 
 
@@ -54,14 +35,40 @@ app.get('*', (req,res) =>{
 // Run when client connects
 io.on('connection', socket => {
 
-  socket.on('createRoom',({room}) => {
+  socket.on('createRoom',({room,user}) => {
     const validate = getCurrentRoomName(room)
-    if(validate){
-      const create = createRoom(room)
+    const usuario = user
+    usuario.id=socket.id
+
+    if(validate==-1){
+      const create = createRoomNew(room,usuario)
       socket.join(room);
-      io.to(room).emit('roomCreate', {
+      io.to(room).emit('room', {
         room:create
       });
+    }else{
+      const validae = existMaster(usuario)
+
+      if(validae==true){
+        console.log("1")
+        io.to(socket.id).emit(
+          'sala',`0`
+        );
+      }else{
+        console.log("2")
+        const room  = userJoin(usuario)
+        socket.join(usuario.room);
+
+        socket.broadcast
+            .to(usuario.room)
+            .emit(
+              'message',`${usuario.user} entro al juego`
+        );
+
+        io.to(usuario.room).emit('room', {
+            room: room,
+        });
+      }
     }
   })
 
@@ -70,65 +77,57 @@ io.on('connection', socket => {
     if(room.master){
       const chocolate = chocolatear(room.room)
       io.to(room.room).emit('play', {
-        data:chocolate
+        room:chocolate
       });
     }
   })
 
-  socket.on('joinRoom', ({ bingo, phone, room, user, master }) => {
-    // console.log(socket)
-
-    const validate = getCurrentPhone(phone)
-
-    if(validate){
-      const userP = userJoin(socket.id, phone, user, room, bingo, master)
-    
-      socket.join(userP.room);
-  
-      // Broadcast when a user connects
-      socket.broadcast
-        .to(userP.room)
-        .emit(
-          'message',`${userP.user} entro al juego`
-      );
-  
-      // Send users and room info
-      io.to(userP.room).emit('roomUsers', {
-          room: userP.room,
-          users: getRoomUsers(userP.room)
+  socket.on('win',({room}) => {
+      io.to(room.room).emit('pausar','0');
+      const bingo = pushBingo(room)
+      io.to(room.room).emit('bingo', {
+        room:bingo
       });
+  })
 
+  socket.on('joinRoom', ({ user }) => {
+
+    const usuario = user
+    usuario.id=socket.id
+
+    const room  = userJoin(usuario)
+
+    if(room!=null){
+      socket.join(usuario.room);
+
+      socket.broadcast
+          .to(usuario.room)
+          .emit(
+            'message',`${usuario.user} entro al juego`
+      );
+
+      io.to(usuario.room).emit('room', {
+          room: room,
+      });
     }else{
       io.to(socket.id).emit(
-        'validatePhone',`0`
+        'sala',`0`
       );
     }
+
 });
   
-
-  // Listen for chatMessage
-//   socket.on('chatMessage', msg => {
-//     const user = getCurrentUser(socket.id);
-
-//     io.to(user.room).emit('message', formatMessage(user.username, msg));
-//   });
 
   // Runs when client disconnects
     socket.on('disconnect', () => {
       const user = userLeave(socket.id);
-
-      if (user) {
-        io.to(user.room).emit(
-          'message',`${user.user} Salio de la sala`
-        );
-
-        // Send users and room info
-        io.to(user.room).emit('roomUsers', {
-          room: user.room,
-          users: getRoomUsers(user.room)
-        });
+      if (user!=null) {
+        io.to(user.room).emit('room', {
+          room: getRoom(user.room)[0],
+        })
+        io.to(user.room).emit('message', `${user.user} salio del juego`);
       }
-    });
+    })
 });
 
 const port = process.env.PORT || 3000;

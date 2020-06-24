@@ -44,12 +44,6 @@ export class BottomSheetOverviewExampleSheet {
 })
 export class HomeComponent implements OnInit {
 
-  rowBingo = 5
-  countBingo = 75
-  objectBingo = []
-  arrayBingo=[]
-  saveObjectBingo=[]
-
   arrayString = ['b','i','n','g','o']
   numbersBingo = {
     b: [],
@@ -72,7 +66,6 @@ export class HomeComponent implements OnInit {
   constructor(private formBuilder : FormBuilder,private _snackBar: MatSnackBar,private _bottomSheet: MatBottomSheet, private router:Router,private global : GlobalServiceService) { }
 
   ngOnInit() {
-    // this.objBingo()
     this.createForm()
     this.completeNumbers()
   }
@@ -138,6 +131,7 @@ export class HomeComponent implements OnInit {
     this.numbersBingo.n[2]='FREE'
     this.numbersBingo.g = array.g.slice(0, 5)
     this.numbersBingo.o = array.o.slice(0, 5)
+    
   }
 
   flip(){
@@ -145,75 +139,42 @@ export class HomeComponent implements OnInit {
   }
 
   swiperight(e){
-    console.log(e)
     this.class=[]
-    setTimeout(() => {
-      this.class=['flip2']
-    }, 100);
+    this.playAudio();
     setTimeout(() => {
       this.completeNumbers()
       this.class=['flip']
-    }, 400);
+    }, 100);
+
   }
 
-  // async postCreateSala(obj,type){
-  //   this.global.globalPost('GET',`https://bingorgr.herokuapp.com/bingo/createSala/${obj.room}`,null,'response').subscribe(
-  //     res=>{
-  //       if(!res.body.room){
-  //         if(this.savePhone){
-  //           localStorage.setItem('phone',obj.phone)
-  //         }else{
-  //             localStorage.removeItem('phone')
-  //         }
-  //         if(this.saveUser){
-  //           localStorage.setItem('user',obj.user)
-  //         }else{
-  //           localStorage.removeItem('user')
-  //         }
+  playAudio(){
+    let audio = new Audio();
+    audio.src = "assets/sound.wav";
+    audio.load();
+    audio.play();
+  }
 
-  //         sessionStorage.setItem("sessionRoom",JSON.stringify(obj))
+  formatBingo(){
+    let bingo = this.numbersBingo
+    
+    for (let index = 0; index < 5; index++) {
+      this.numbersBingo.b[index]={id:this.numbersBingo.b[index],selected:false}
+      this.numbersBingo.i[index]={id:this.numbersBingo.i[index],selected:false}
+      this.numbersBingo.n[index]={id:this.numbersBingo.n[index],selected:false}
+      this.numbersBingo.g[index]={id:this.numbersBingo.g[index],selected:false}
+      this.numbersBingo.o[index]={id:this.numbersBingo.o[index],selected:false}
+    }
 
-  //         this.router.navigate([`/bingo/${obj.room}`])
-  //       }else{
-  //         if(type==1){
-  //           if(this.savePhone){
-  //             localStorage.setItem('phone',obj.phone)
-  //           }else{
-  //               localStorage.removeItem('phone')
-  //           }
-  //           if(this.saveUser){
-  //             localStorage.setItem('user',obj.user)
-  //           }else{
-  //             localStorage.removeItem('user')
-  //           }
+    return bingo
+  }
   
-  //           sessionStorage.setItem("sessionRoom",JSON.stringify(obj))
-  
-  //           this.router.navigate([`/bingo/${obj.room}`])
-  //         }else{
-  //           this._snackBar.open('La sala ya existe.',null,{duration:2500});
-  //         }
-  //       }
-        
-  //     },
-  //     error=>{
-  //       this._snackBar.open('Lo sentimos intentalo de nuevo.',null,{duration:2500});
-  //     }
-  //   )
-  // }
-
   async validate(response,type){
-    console.log(response)
-    console.log(type)
+
     if(this.formGroup.status == "VALID"){
 
-        if(this.arrayBingo.length!=8){
-          this._snackBar.open('Debe seleccionar 8 números',null,{duration:2500});
-          return false
-        }
-        
         let objectData = response
-        objectData.bingo = this.arrayBingo
+        objectData.bingo = this.formatBingo()
         objectData.master = type == 0 ? true:false
 
         if(this.savePhone){
@@ -227,12 +188,11 @@ export class HomeComponent implements OnInit {
           localStorage.removeItem('user')
         }
 
+        console.log(objectData)
         sessionStorage.setItem("sessionRoom",JSON.stringify(objectData))
 
         this.router.navigate([`/bingo/${objectData.room}`])
 
-    }else{
-      this._snackBar.open('Debe seleccionar 5 números',null,{duration:2500});
     }
   }
 
@@ -279,96 +239,6 @@ export class HomeComponent implements OnInit {
     }
     return false;
   }
-
-  objBingo (){
-    for (let index = 1; index <= this.countBingo; index++) {
-      this.objectBingo.push({id:`numero${index}`,number:index ,selected:false})
-    }
-  }
-
-  changeBG(element){
-    if(element.selected){
-      return { ['background-color']:`#e91e63`}
-    }
-  }
-
-  changeBGspan(element){
-    if(element.selected){
-      return { ['color']:`#FFFFFF`}
-    }
-  }
-
-  selectNumber(position){
-
-    if(this.objectBingo[position].selected){
-      this.objectBingo[position].selected=false
-      this.arrayBingo.splice(this.arrayBingo.indexOf(this.objectBingo[position].number),1)
-      return false
-    }
-
-    if(this.arrayBingo.length>7){
-      return false
-    }
-
-    this.objectBingo[position].selected = true
-    this.arrayBingo.push(this.objectBingo[position].number)
-    this.arrayBingo.sort(function(a, b){return a-b})
-  }
-
-  functionGlobal(type){
-
-    let saveArrayBingo=[]
-    let saveObjectBingo=[]
-
-    if(localStorage.getItem('objectBingo') && localStorage.getItem('arrayBingo') ){
-      saveArrayBingo = JSON.parse(localStorage.getItem('arrayBingo'))
-      saveObjectBingo = JSON.parse(localStorage.getItem('objectBingo'))
-    }
-
-    if(type == 'save'){
-      if(this.arrayBingo.length==5){
-        saveObjectBingo.push(this.objectBingo)
-        saveArrayBingo.push(this.arrayBingo)
-        
-        localStorage.setItem('objectBingo',JSON.stringify(saveObjectBingo))
-        localStorage.setItem('arrayBingo',JSON.stringify(saveArrayBingo))
-
-
-        this._snackBar.open('Cartilla guardada con exito.',null,{duration:2500});
-
-      }else{
-        this._snackBar.open('Debe seleccionar 5 números.',null,{duration:2500});
-      }
-    }else if(type == 'clear'){
-      this.objectBingo=[]
-      this.arrayBingo = []
-      for (let index = 1; index <= this.countBingo; index++) {
-        this.objectBingo.push({id:`numero${index}`,number:index ,selected:false})
-      }
-    }else if('change'){
-      
-    }else{
-
-      const dialogRef = this._bottomSheet.open(
-        BottomSheetOverviewExampleSheet,
-        {data: { bingo: saveArrayBingo }}
-      );
-
-      dialogRef.afterDismissed().subscribe(result => {
-
-        if(sessionStorage.getItem('getFavorite')){
-          this.arrayBingo = saveArrayBingo[sessionStorage.getItem('getFavorite')]
-          this.objectBingo = saveObjectBingo[sessionStorage.getItem('getFavorite')]
-        }
-
-        sessionStorage.removeItem('getFavorite')
-      });
-
-    }
-
-      
-  }
-
   
 
 }

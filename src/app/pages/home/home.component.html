@@ -1,6 +1,6 @@
 <div class="container">
   <div class="con-right">
-    <div class="contain" [ngClass]="flip()" (swiperight)="swiperight($event)">
+    <div class="contain"  (swiperight)="swiperight($event)" (swipeleft)="swiperight($event)">
       <div class="head-bingo">
         <div class="{{element}}" *ngFor="let element of arrayString; let i = index">
           <p >{{element}}</p>
@@ -8,27 +8,27 @@
       </div>
       <div class="body-bingo">
         <div class="column1 column" >
-          <div *ngFor="let element of numbersBingo.b; let i = index">
+          <div *ngFor="let element of numbersBingo.b; let i = index" [ngClass]="flip()">
             <p>{{element}}</p>
           </div>
         </div>
         <div class="column2 column" >
-          <div *ngFor="let element of numbersBingo.i; let i = index">
+          <div *ngFor="let element of numbersBingo.i; let i = index" [ngClass]="flip()">
             <p>{{element}}</p>
           </div>
         </div>
         <div class="column3 column">
-          <div *ngFor="let element of numbersBingo.n; let i = index" class="{{element}}">
+          <div *ngFor="let element of numbersBingo.n; let i = index" class="{{element}}" [ngClass]="flip()">
             <p >{{element}}</p>
           </div>
         </div>
         <div class="column4 column">
-          <div *ngFor="let element of numbersBingo.g; let i = index">
+          <div *ngFor="let element of numbersBingo.g; let i = index" [ngClass]="flip()">
             <p>{{element}}</p>
           </div>
         </div>
         <div class="column5 column" >
-          <div *ngFor="let element of numbersBingo.o; let i = index">
+          <div *ngFor="let element of numbersBingo.o; let i = index" [ngClass]="flip()">
             <p>{{element}}</p>
           </div>
         </div>
@@ -76,4 +76,6 @@
     </div>
 
   </form> 
+
+  
 </div>

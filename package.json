@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node serve",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
@@ -23,8 +23,8 @@
     "@angular/router": "~7.2.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
-    "cors": "^2.8.5",
     "core-js": "^2.5.4",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "hammerjs": "^2.0.8",
     "ng-lottie": "^0.3.2",
@@ -32,6 +32,7 @@
     "rxjs": "^6.5.4",
     "rxjs-compat": "^6.5.4",
     "socket.io": "^2.3.0",
+    "speak-tts": "^2.0.8",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
