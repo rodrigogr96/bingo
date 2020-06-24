@@ -4,16 +4,9 @@ const express = require('express');
 const socketio = require('socket.io');
 const {
     userJoin,
-    getCurrentUser,
     userLeave,
-    getRoomUsers,
-    getCurrentPhone,
-    all,
-    chocolatearArray,
-    createRoom,
     getCurrentRoomName,
     chocolatear,
-    getRoomBingo,
     getRoom,
     createRoomNew,
     existMaster,
