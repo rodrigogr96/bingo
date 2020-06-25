@@ -630,13 +630,14 @@ form{
 @media only screen 
 and (orientation : portrait) {
     .container{
-        transform:rotate(-90deg);
+        transform: rotate(-90deg) scale(0.95);
         transform-origin: left top;
         width: 100vh;
         height: 100vw;
         position: absolute;
-        top: 100%;
-        left: 0;
+        top: 97.5vh;
+        left: 2.5vw;
+        align-self: center;
     }
     .head-bingo{
         height: 7vw;

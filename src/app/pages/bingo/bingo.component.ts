@@ -57,7 +57,7 @@ export class BingoComponent implements OnInit,OnDestroy {
 
   constructor(private route: ActivatedRoute, private router:Router,private _snackBar: MatSnackBar,private location: Location) { 
     this.objBingo()
-    this.socket = io()
+    this.socket = io('http://localhost:3000')
   }
 
   ngOnDestroy(){
