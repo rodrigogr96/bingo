@@ -625,3 +625,61 @@ form{
     flex-direction: row;
     align-self: center;
 }
+
+
+@media only screen 
+and (orientation : portrait) {
+    .container{
+        transform:rotate(-90deg);
+        transform-origin: left top;
+        width: 100vh;
+        height: 100vw;
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
+    .head-bingo{
+        height: 7vw;
+    }
+    .body-bingo{
+        height: 93vw;
+    }
+    .body-bingo2{
+        height: 85vw;
+    }
+    .head-bingo2{
+        height: 15vw;
+    }
+
+    .con-right{
+        width: 20vh;
+        height: 100vw;
+    }
+
+    .contain{
+        width: 50vh;
+        height: 100vw;
+    }
+
+    .playerss{
+        width: 30vh;
+        height: 100vw;
+    }
+
+    .bingo-balls{
+        height: 15vw;
+        width: 1000vh;
+    }
+    .canto{
+        height: 15vw;
+        width: calc(15vw);
+    }
+    .plays{
+        height: 85vw;
+    }
+
+    .balls{
+        width: 13vw;
+        height: 13vw;
+    }
+}
