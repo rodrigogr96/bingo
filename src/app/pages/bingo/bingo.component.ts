@@ -57,7 +57,7 @@ export class BingoComponent implements OnInit,OnDestroy {
 
   constructor(private route: ActivatedRoute, private router:Router,private _snackBar: MatSnackBar,private location: Location) { 
     this.objBingo()
-    this.socket = io('http://localhost:3000')
+    this.socket = io()
   }
 
   ngOnDestroy(){
@@ -140,7 +140,7 @@ export class BingoComponent implements OnInit,OnDestroy {
 
   win(){
     if(this.bingo.length>0){
-      return { ['height']:`100vh`,['opacity']:'1',['display']:'flex' }
+      return { ['height']:`100vh`,['opacity']:'1',['display']:'flex',['transform']:'scale(1)' }
     }
   }
 
@@ -151,7 +151,7 @@ export class BingoComponent implements OnInit,OnDestroy {
 
   changeBG(element){
     if(element.selected){
-      return { ['background-color']:`#ffd740` }
+      return { ['background-color']:`#fff`,['transform']:'rotateX(80deg) scaleY(2)'}
     }
   }
 
@@ -173,6 +173,8 @@ export class BingoComponent implements OnInit,OnDestroy {
 
     this.socket.on("play",data=>{
       console.log(data)
+
+      this.ballAudio()
       this.arrayBingo=data.room.arrayBingo
       this.numberSeleted=data.room.selectNumber
       this.infoRoom = data.room.users
@@ -384,6 +386,13 @@ export class BingoComponent implements OnInit,OnDestroy {
   goodAudio(){
     let audio = new Audio();
     audio.src = "assets/yeah.wav";
+    audio.load();
+    audio.play();
+  }
+
+  ballAudio(){
+    let audio = new Audio();
+    audio.src = "assets/ball.mp3";
     audio.load();
     audio.play();
   }

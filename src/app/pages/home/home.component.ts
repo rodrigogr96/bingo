@@ -96,41 +96,87 @@ export class HomeComponent implements OnInit {
   randomNumbers(array){
     var ctr = 15, tempb,tempi,tempn,tempg,tempo,indexb,indexi,indexn,indexg,indexo;
 
-    while (ctr > 0) {
+    let temp :any  = []
+    
+    
+    // while (ctr > 0) {
 
-        indexb = Math.floor(Math.random() * ctr);
-        indexi = Math.floor(Math.random() * ctr);
-        indexn = Math.floor(Math.random() * ctr);
-        indexg = Math.floor(Math.random() * ctr);
-        indexo = Math.floor(Math.random() * ctr);
+    //     indexb = Math.floor(Math.random() * ctr);
+    //     indexi = Math.floor(Math.random() * ctr);
+    //     indexn = Math.floor(Math.random() * ctr);
+    //     indexg = Math.floor(Math.random() * ctr);
+    //     indexo = Math.floor(Math.random() * ctr);
 
-        ctr--;
+    //     ctr--;
 
-        tempb = array.b[ctr];
-        tempi = array.i[ctr];
-        tempn = array.n[ctr];
-        tempg = array.g[ctr];
-        tempo = array.o[ctr];
+    //     tempb = array.b[ctr];
+    //     tempi = array.i[ctr];
+    //     tempn = array.n[ctr];
+    //     tempg = array.g[ctr];
+    //     tempo = array.o[ctr];
 
-        array.b[ctr] = array.b[indexb];
-        array.i[ctr] = array.i[indexi];
-        array.n[ctr] = array.n[indexn];
-        array.g[ctr] = array.g[indexg];
-        array.o[ctr] = array.o[indexo];
+    //     array.b[ctr] = array.b[indexb];
+    //     array.i[ctr] = array.i[indexi];
+    //     array.n[ctr] = array.n[indexn];
+    //     array.g[ctr] = array.g[indexg];
+    //     array.o[ctr] = array.o[indexo];
 
-        array.b[indexb] = tempb;
-        array.i[indexi] = tempi;
-        array.n[indexn] = tempn;
-        array.g[indexg] = tempg;
-        array.o[indexo] = tempo;
+    //     array.b[indexb] = tempb;
+    //     array.i[indexi] = tempi;
+    //     array.n[indexn] = tempn;
+    //     array.g[indexg] = tempg;
+    //     array.o[indexo] = tempo;
+    // }
+
+    var count = 15
+    var ct = 5
+
+    // this.numbersBingo.b=[]
+    // this.numbersBingo.i=[]
+    // this.numbersBingo.n=[]
+    // this.numbersBingo.g=[]
+    // this.numbersBingo.o=[]
+
+    temp = array
+
+    var newArray:any ={
+      b: [],
+      i: [],
+      n: [],
+      g: [],
+      o: []
     }
 
-    this.numbersBingo.b = array.b.slice(0, 5)
-    this.numbersBingo.i = array.i.slice(0, 5)
-    this.numbersBingo.n = array.n.slice(0, 5)
+    while (ct > 0) {
+
+      let indexb = Math.floor(Math.random() * count);
+      let indexi = Math.floor(Math.random() * count);
+      let indexn = Math.floor(Math.random() * count);
+      let indexg = Math.floor(Math.random() * count);
+      let indexo = Math.floor(Math.random() * count);
+
+      count--
+      ct--
+      
+      newArray.b.push(array.b[indexb])
+      newArray.i.push(array.i[indexi])
+      newArray.n.push(array.n[indexn])
+      newArray.g.push(array.g[indexg])
+      newArray.o.push(array.o[indexo])
+
+      array.b.splice(indexb,1)
+      array.i.splice(indexi,1)
+      array.n.splice(indexn,1)
+      array.g.splice(indexg,1)
+      array.o.splice(indexo,1)
+
+    }
+
+    this.numbersBingo=newArray
+
     this.numbersBingo.n[2]='FREE'
-    this.numbersBingo.g = array.g.slice(0, 5)
-    this.numbersBingo.o = array.o.slice(0, 5)
+
+    console.table(newArray)
     
   }
 

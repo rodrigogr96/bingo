@@ -64,28 +64,38 @@
     </div>
     <div class="body-bingo2">
       <div class="column1 column2" >
-        <div *ngFor="let element of cardBingo.b; let i = index" (click)="select(element,i,'b')" [ngStyle]="changeBG(element)">
-          <p>{{element.id}}</p>
+        <div *ngFor="let element of cardBingo.b; let i = index" class="pers" (click)="select(element,i,'b')" >
+          <div [ngStyle]="changeBG(element)">
+            <p>{{element.id}}</p>
+          </div>
         </div>
       </div>
       <div class="column2 column2" >
-        <div *ngFor="let element of cardBingo.i; let i = index" (click)="select(element,i,'i')" [ngStyle]="changeBG(element)">
-          <p>{{element.id}}</p>
+        <div *ngFor="let element of cardBingo.i; let i = index" class="pers" (click)="select(element,i,'i')">
+          <div [ngStyle]="changeBG(element)">
+            <p>{{element.id}}</p>
+          </div>
         </div>
       </div>
       <div class="column3 column2">
-        <div *ngFor="let element of cardBingo.n; let i = index" class="{{element}}" (click)="select(element,i,'n')" [ngStyle]="changeBG(element)">
-          <p >{{element.id}}</p>
+        <div *ngFor="let element of cardBingo.n; let i = index" class="{{element.id}} pers" (click)="select(element,i,'n')" >
+          <div [ngStyle]="changeBG(element)">
+            <p>{{element.id}}</p>
+          </div>
         </div>
       </div>
       <div class="column4 column2">
-        <div *ngFor="let element of cardBingo.g; let i = index" (click)="select(element,i,'g')" [ngStyle]="changeBG(element)">
-          <p>{{element.id}}</p>
+        <div *ngFor="let element of cardBingo.g; let i = index" class="pers" (click)="select(element,i,'g')" >
+          <div [ngStyle]="changeBG(element)">
+            <p>{{element.id}}</p>
+          </div>
         </div>
       </div>
       <div class="column5 column2" >
-        <div *ngFor="let element of cardBingo.o; let i = index" (click)="select(element,i,'o')" [ngStyle]="changeBG(element)">
-          <p>{{element.id}}</p>
+        <div *ngFor="let element of cardBingo.o; let i = index" class="pers" (click)="select(element,i,'o')" >
+          <div [ngStyle]="changeBG(element)">
+            <p>{{element.id}}</p>
+          </div>
         </div>
       </div>
     </div>

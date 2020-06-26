@@ -113,22 +113,16 @@ function chocolatear(room) {
   
   if(index2>-1){
     if(rooms[index2].arrayBingo.length>0){
-      var ctr = rooms[index2].arrayBingo.length, temp, index;
+      var ctr = rooms[index2].arrayBingo.length
 
-      while (ctr > 0) {
+      var aleatorio 
 
-          index = Math.floor(Math.random() * ctr);
-
-          ctr--;
-
-          temp = rooms[index2].arrayBingo[ctr];
-          rooms[index2].arrayBingo[ctr] = rooms[index2].arrayBingo[index];
-          rooms[index2].arrayBingo[index] = temp;
-
+      for (let index = 0; index < ctr; index++) {
+        aleatorio = Math.floor(Math.random() * ctr);
       }
 
-      rooms[index2].selectNumber.push(rooms[index2].arrayBingo[0])
-      rooms[index2].arrayBingo.shift()
+      rooms[index2].selectNumber.push(rooms[index2].arrayBingo[aleatorio])
+      rooms[index2].arrayBingo.splice(aleatorio,1)
     }
   }
 
