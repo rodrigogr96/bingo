@@ -8,11 +8,15 @@ function userJoin(user) {
   const posicionRoom = rooms.findIndex(r => r.room === user.room)
 
   if(posicionRoom>-1){
-    const push = rooms[posicionRoom].users
-    push.push(user)
-    return rooms[posicionRoom];
+    if(rooms[posicionRoom].ready){
+      return 0
+    }else{
+      const push = rooms[posicionRoom].users
+      push.push(user)
+      return rooms[posicionRoom];
+    }
   }else{
-    return null
+    return 1
   }
   
 }
@@ -23,7 +27,11 @@ function pushBingo(user) {
 
   if(posicionRoom>-1){
     const push = rooms[posicionRoom].bingo
-    push.push(user)
+    if(rooms[posicionRoom].bingo.length>0){
+
+    }else{
+      push.push(user)
+    }
     return rooms[posicionRoom];
   }else{
     return null
@@ -32,22 +40,30 @@ function pushBingo(user) {
 }
 
 function createRoomNew(room,user){
-  let array = []
-  let select = []
-  let users = []
-  let bingo = []
 
-  for (let index = 1; index <= 75; index++) {
+  let array = []
+  let users = []
+
+  for (let index = 1; index <= room.count; index++) {
     array.push(index)
   }
 
   users.push(user)
 
-  const newRomm = { room:room,ready:false,arrayBingo:array,selectNumber:select,users:users, bingo:bingo};
+  const newRoom={
+    room:room.room,
+    count:room.count,
+    arrayBingo:array,
+    select:[],
+    ready:false,
+    users:users,
+    bingo:[],
+    shape:room.shape
+  }
 
-  rooms.push(newRomm)
+  rooms.push(newRoom)
 
-  return newRomm
+  return newRoom
 }
 
 function existMaster(info){
@@ -89,15 +105,21 @@ function userLeave(id) {
   }
 
   if(indexRoom>-1 && indexUser>-1){
+    
+    let validate = rooms[indexRoom].users[indexUser].master
     rooms[indexRoom].users.splice(indexUser,1)
-
+   
     if(rooms[indexRoom].users.length<1){
       rooms.splice(indexRoom,1)
       element=null
+    }else{
+      if(validate){
+        rooms[indexRoom].users[0].master=true
+      }
     }
   }
 
-  return element
+  return {element,room:rooms[indexRoom]}
 }
 
 function getRoom(room) {
@@ -113,6 +135,9 @@ function chocolatear(room) {
   
   if(index2>-1){
     if(rooms[index2].arrayBingo.length>0){
+
+      rooms[index2].ready=true
+      
       var ctr = rooms[index2].arrayBingo.length
 
       var aleatorio 
@@ -121,7 +146,7 @@ function chocolatear(room) {
         aleatorio = Math.floor(Math.random() * ctr);
       }
 
-      rooms[index2].selectNumber.push(rooms[index2].arrayBingo[aleatorio])
+      rooms[index2].select.push(rooms[index2].arrayBingo[aleatorio])
       rooms[index2].arrayBingo.splice(aleatorio,1)
     }
   }

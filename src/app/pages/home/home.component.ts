@@ -54,6 +54,7 @@ export class HomeComponent implements OnInit {
   }
   class = ['flip']
 
+  bounceButton = []
 
   formGroup: FormGroup
   userError: string = ''
@@ -67,8 +68,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.createForm()
-    this.completeNumbers()
+    // this.completeNumbers()
   }
+
 
   clear(){
     this.numbersBingo.b=[]
@@ -180,6 +182,10 @@ export class HomeComponent implements OnInit {
     
   }
 
+  bounce(){
+    return this.bounceButton
+  }
+
   flip(){
     return this.class
   }
@@ -217,29 +223,38 @@ export class HomeComponent implements OnInit {
   
   async validate(response,type){
 
+    console.log(response)
+    console.log(this.formGroup)
     if(this.formGroup.status == "VALID"){
-
-        let objectData = response
-        objectData.bingo = this.formatBingo()
-        objectData.master = type == 0 ? true:false
-
-        if(this.savePhone){
-          localStorage.setItem('phone',objectData.phone)
-        }else{
-            localStorage.removeItem('phone')
-        }
-        if(this.saveUser){
-          localStorage.setItem('user',objectData.user)
-        }else{
-          localStorage.removeItem('user')
-        }
-
-        console.log(objectData)
-        sessionStorage.setItem("sessionRoom",JSON.stringify(objectData))
-
-        this.router.navigate([`/bingo/${objectData.room}`])
+      let objectData = response
+      localStorage.setItem('phone',objectData.phone)
+      localStorage.setItem('user',objectData.user)
+      this.router.navigate(['/home'],{replaceUrl:true})
+    }else{
 
     }
+
+    //     let objectData = response
+    //     objectData.bingo = this.formatBingo()
+    //     objectData.master = type == 0 ? true:false
+
+    //     if(this.savePhone){
+    //       localStorage.setItem('phone',objectData.phone)
+    //     }else{
+    //         localStorage.removeItem('phone')
+    //     }
+    //     if(this.saveUser){
+    //       localStorage.setItem('user',objectData.user)
+    //     }else{
+    //       localStorage.removeItem('user')
+    //     }
+
+    //     console.log(objectData)
+    //     sessionStorage.setItem("sessionRoom",JSON.stringify(objectData))
+
+    //     this.router.navigate([`/bingo/${objectData.room}`])
+
+    // }
   }
 
   createForm() {
@@ -255,8 +270,7 @@ export class HomeComponent implements OnInit {
     }
     this.formGroup = this.formBuilder.group({
       'phone': [phone, Validators.required],
-      'user': [user, Validators.required],
-      'room': [null, Validators.required]
+      'user': [user, Validators.required]
     });
   }
 

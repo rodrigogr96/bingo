@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -7,12 +8,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BingoComponent } from './pages/bingo/bingo.component';
 import { HomeComponent,BottomSheetOverviewExampleSheet } from './pages/home/home.component';
+import { SplashComponent } from './pages/splash/splash.component';
+import { HomeBingoComponent } from './pages/home-bingo/home-bingo.component';
+import { Angular2UsefulSwiperModule } from 'angular2-useful-swiper';
 //MATERIAL
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { NgxMaskModule} from 'ngx-mask'
 import { OnlynumberStringDirective } from './directives/onlyNumberString.directive'
+import { NgxArcTextModule } from 'ngx-arc-text';
 
 // const maskConfig: Partial<IConfig> = {
 //   validation: false,
@@ -24,7 +29,9 @@ import { OnlynumberStringDirective } from './directives/onlyNumberString.directi
     BingoComponent,
     HomeComponent,
     OnlynumberStringDirective,
-    BottomSheetOverviewExampleSheet
+    BottomSheetOverviewExampleSheet,
+    SplashComponent,
+    HomeBingoComponent
   ],
   imports: [
     NgxMaskModule.forRoot(),
@@ -33,7 +40,10 @@ import { OnlynumberStringDirective } from './directives/onlyNumberString.directi
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,HttpClientModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    Angular2UsefulSwiperModule,
+    NgxArcTextModule
   ],
   entryComponents: [ BottomSheetOverviewExampleSheet ],
   providers: [

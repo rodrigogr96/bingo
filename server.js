@@ -29,40 +29,118 @@ app.get('*', (req,res) =>{
 io.on('connection', socket => {
 
   socket.on('createRoom',({room,user}) => {
-    const validate = getCurrentRoomName(room)
+    const sala = room
     const usuario = user
+    const validate = getCurrentRoomName(usuario.room)
     usuario.id=socket.id
 
     if(validate==-1){
-      const create = createRoomNew(room,usuario)
-      socket.join(room);
-      io.to(room).emit('room', {
+      const create = createRoomNew(sala,usuario)
+      socket.join(sala.room);
+      io.to(sala.room).emit('room', {
         room:create
       });
     }else{
-      const validae = existMaster(usuario)
-
-      if(validae==true){
-        console.log("1")
+      const validate = existMaster(usuario)
+      if(validate){
         io.to(socket.id).emit(
-          'sala',`0`
-        );
+          'existMaster',true
+        )
+        usuario.master = false
+        const infoRoom  = userJoin(usuario)
+
+        if(infoRoom==0){
+          
+          io.to(socket.id).emit(
+            'ready',true
+          )
+
+        }else if(infoRoom==1){
+
+          io.to(socket.id).emit(
+            'existRoom',false
+          )
+
+        }else{
+          socket.join(usuario.room);
+
+          socket.broadcast
+              .to(usuario.room)
+              .emit(
+                'message',`${usuario.user} entro al juego`
+          )
+
+          io.to(usuario.room).emit('changeMaster', {
+              room: infoRoom,
+          })
+
+          io.to(usuario.id).emit('idroom', {
+            room: infoRoom,
+          })
+
+          io.to(usuario.room).emit('addRoom', {
+              room: infoRoom,
+          })
+        }
+
       }else{
-        console.log("2")
-        const room  = userJoin(usuario)
-        socket.join(usuario.room);
+        const infoRoom  = userJoin(usuario)
 
-        socket.broadcast
-            .to(usuario.room)
-            .emit(
-              'message',`${usuario.user} entro al juego`
-        );
+        if(infoRoom==0){
+          
+          io.to(socket.id).emit(
+            'ready',true
+          )
 
-        io.to(usuario.room).emit('room', {
-            room: room,
-        });
+        }else if(infoRoom==1){
+
+          io.to(socket.id).emit(
+            'existRoom',false
+          )
+
+        }else{
+          socket.join(usuario.room);
+
+          socket.broadcast
+              .to(usuario.room)
+              .emit(
+                'message',`${usuario.user} entro al juego`
+          )
+
+          io.to(usuario.id).emit('idroom', {
+            room: infoRoom,
+          })
+  
+          io.to(usuario.room).emit('addRoom', {
+              room: infoRoom,
+          })
+        }
       }
     }
+    //else{
+    //   const validae = existMaster(usuario)
+
+    //   if(validae==true){
+    //     console.log("1")
+    //     io.to(socket.id).emit(
+    //       'sala',`0`
+    //     );
+    //   }else{
+    //     console.log("2")
+    //     const room  = userJoin(usuario)
+    //     socket.join(usuario.room);
+
+    //     socket.broadcast
+    //         .to(usuario.room)
+    //         .emit(
+    //           'message',`${usuario.user} entro al juego`
+    //     );
+
+    //     io.to(usuario.room).emit('room', {
+    //         room: room,
+    //     });
+    //   }
+    // }
   })
 
   socket.on('girar',({room}) => {
@@ -78,9 +156,13 @@ io.on('connection', socket => {
   socket.on('win',({room}) => {
       io.to(room.room).emit('pausar','0');
       const bingo = pushBingo(room)
-      io.to(room.room).emit('bingo', {
-        room:bingo
-      });
+      if(bingo==null){
+        io.to(room.room).emit('play','0');
+      }else{
+        io.to(room.room).emit('bingo', {
+          room:bingo
+        });
+      }
   })
 
   socket.on('joinRoom', ({ user }) => {
@@ -90,7 +172,16 @@ io.on('connection', socket => {
 
     const room  = userJoin(usuario)
 
-    if(room!=null){
+    if(room == 0){
+      io.to(socket.id).emit(
+        'ready',true
+      )
+    }else if(room == 1){
+      io.to(socket.id).emit(
+        'existRoom',false
+      )
+    }else{
+
       socket.join(usuario.room);
 
       socket.broadcast
@@ -99,13 +190,13 @@ io.on('connection', socket => {
             'message',`${usuario.user} entro al juego`
       );
 
-      io.to(usuario.room).emit('room', {
+      io.to(usuario.id).emit('idroom', {
           room: room,
-      });
-    }else{
-      io.to(socket.id).emit(
-        'sala',`0`
-      );
+      })
+
+      io.to(usuario.room).emit('addRoom', {
+          room: room,
+      })
     }
 
 });
@@ -114,11 +205,11 @@ io.on('connection', socket => {
   // Runs when client disconnects
     socket.on('disconnect', () => {
       const user = userLeave(socket.id);
-      if (user!=null) {
-        io.to(user.room).emit('room', {
-          room: getRoom(user.room)[0],
+      if (user.element!=null) {
+        io.to(user.element.room).emit('leaveroom', {
+          room: user.room,
         })
-        io.to(user.room).emit('message', `${user.user} salio del juego`);
+        io.to(user.element.room).emit('message', `${user.element.user} salio del juego`);
       }
     })
 });
