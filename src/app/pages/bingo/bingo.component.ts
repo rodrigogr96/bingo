@@ -475,24 +475,20 @@ export class BingoComponent implements OnInit,OnDestroy {
     });
     
     this.socket.on("pausar", data => {
-      if(this.myInfo.master){
-        console.log(data)
+      if(this.info.master){
         this.play=false
         clearInterval(this.intervalo)
       }
     });
 
     this.socket.on("play", data => {
-      if(this.myInfo.master){
-        console.log(data)
+      if(this.info.master){
         this.play=true
         this.girar()
       }
     });
 
     this.socket.on("bingo", data => {
-      console.log("bingo")
-      console.log(data)
       this.room = data.room
       this.arrayBingo=data.room.arrayBingo
       this.numberSeleted=data.room.select
@@ -500,6 +496,10 @@ export class BingoComponent implements OnInit,OnDestroy {
       this.bingo = data.room.bingo
       this.shapeRoomBingo = data.room.shape
       this.class=['seven']
+      if(this.info.master){
+        this.play=false
+        clearInterval(this.intervalo)
+      }
       speech.speak({
         text: `BINGO`,
         queue: false
