@@ -60,7 +60,7 @@ input:focus::-webkit-input-placeholder {
   transition: all 0.4s ease;
 }
 
-#card {
+#card10 {
     align-self: center;
     background: white;
 	  box-shadow: 0 15px 25px -10px rgba(0,0,0,0.4);
@@ -70,10 +70,10 @@ input:focus::-webkit-input-placeholder {
     align-self: center;
     transition: all 0.5s ease;
     opacity: 0;
-    animation: bounce-in-top 1s .5s ease-in-out forwards, wrap 0.4s 1.5s ease-in-out forwards;
+    animation: bounce-in-top3 1s .5s ease-in-out forwards, wrap7 0.4s 1.5s ease-in-out forwards;
 }
 
-#card2 {
+#card11 {
   margin-top: 40px;
   background: white;
   box-shadow: 0 15px 25px -10px rgba(0,0,0,0.4);
@@ -84,35 +84,35 @@ input:focus::-webkit-input-placeholder {
   transition: all 0.5s ease;
   opacity: 0;
   // animation-delay: 3s;
-  animation: bounce-in-top 1s 2s ease-in-out forwards, wrap 0.4s 3s ease-in-out forwards;
+  animation: bounce-in-top3 1s 2s ease-in-out forwards, wrap7 0.4s 3s ease-in-out forwards;
 }
 
-#card2 label{
+#card11 label{
   position: absolute;
   transform: translateY(-20px);
   width: 250px;
   opacity: 0;
   animation-delay: 1s;
-  animation: visibleLabel 1.3s 3s ease-in-out forwards;
+  animation: visibleLabel7 1.3s 3s ease-in-out forwards;
   color: white;
   letter-spacing: 2px;
   text-transform: uppercase;
   font-size: 12px;
 }
 
-#card label{
+#card10 label{
   position: absolute;
   transform: translateY(-20px);
   width: 250px;
   opacity: 0;
-  animation: visibleLabel 1.3s 1.5s ease-in-out forwards;
+  animation: visibleLabel7 1.3s 1.5s ease-in-out forwards;
   color: white;
   letter-spacing: 2px;
   text-transform: uppercase;
   font-size: 12px;
 }
 
-  @keyframes visibleLabel {
+  @keyframes visibleLabel7 {
     from {
       transform: translateY(50px);
       opacity: 0;
@@ -123,16 +123,16 @@ input:focus::-webkit-input-placeholder {
     }
   }
 
-  #card #input {
-    animation: visible 1.3s 1.5s ease-in-out forwards;
+  #card10 #input10 {
+    animation: visible7 1.3s 1.5s ease-in-out forwards;
     font-size: 16px !important;
   }
 
-  #card2 #input2 {
-    animation: visible 1.3s 3s ease-in-out forwards;
+  #card11 #input11 {
+    animation: visible7 1.3s 3s ease-in-out forwards;
   }
 
-  @keyframes bounce-in-top {
+  @keyframes bounce-in-top3 {
     0% {
         transform: translateY(-500px);
         animation-timing-function: ease-in;
@@ -170,7 +170,7 @@ input:focus::-webkit-input-placeholder {
     }
   }
 
-  @keyframes wrap {
+  @keyframes wrap7 {
     from {
       width: 50px;
       border-radius: 50%;
@@ -181,7 +181,7 @@ input:focus::-webkit-input-placeholder {
     }
   }
   
-  @keyframes visible {
+  @keyframes visible7 {
     from {
       opacity: 0;
     }
