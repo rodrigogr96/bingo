@@ -157,7 +157,7 @@ io.on('connection', socket => {
       io.to(room.room).emit('pausar','0');
       const bingo = pushBingo(room)
       if(bingo==null){
-        io.to(room.room).emit('play','0');
+        io.to(room.room).emit('plays','0');
       }else{
         io.to(room.room).emit('bingo', {
           room:bingo

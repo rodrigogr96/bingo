@@ -481,7 +481,7 @@ export class BingoComponent implements OnInit,OnDestroy {
       }
     });
 
-    this.socket.on("play", data => {
+    this.socket.on("plays", data => {
       if(this.info.master){
         this.play=true
         this.girar()
@@ -560,7 +560,7 @@ export class BingoComponent implements OnInit,OnDestroy {
   }
 
   start(){
-      this.intervalo = setInterval(this.cronometro,5000)
+      this.intervalo = setInterval(this.cronometro,3000)
   }
 
   cronometro=()=> {    
