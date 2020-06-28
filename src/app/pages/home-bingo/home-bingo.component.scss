@@ -113,6 +113,7 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  z-index: 1;
   // justify-content: space-between;
 }
 
@@ -268,12 +269,12 @@ input {
   z-index: 0;
 }
 .scaleU{
-  transform: scale(1) !important;
+  transform: scale(.9) !important;
   filter: brightness(110%) !important;
 }
 
 .scaleB{
-  transform: scale(.7) !important;
+  transform: scale(.8) !important;
   filter: grayscale(40%) !important;
 }
 
@@ -764,6 +765,14 @@ and (orientation : portrait) {
 
 @media only screen 
 and (orientation : landscape) {
+
+  .scaleU{
+    transform: scale(.7) !important;
+  }
+  
+  .scaleB{
+    transform: scale(.5) !important;
+  }
   @keyframes bondJamesBond2 {
     0% {
       height: 25px;
