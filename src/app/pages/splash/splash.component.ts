@@ -20,7 +20,8 @@ export class SplashComponent implements OnInit {
     //     this.router.navigate([`/user`],{replaceUrl:true})
     //   }, 5000);
     // }
-    window.location.replace("app://movistar/login"); 
+    window.location.href="app://movistar/login"
+
     setTimeout(function () {
     window.location.replace("https://play.google.com/store/apps/details?id=tdp.app.col&hl=es_PE"); 
     }, 2000);
